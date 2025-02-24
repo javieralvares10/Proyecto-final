@@ -1,0 +1,52 @@
+// Paso 1: Leer datos de entrada
+let edadAsegurado = prompt("Ingresa la edad del asegurado:");
+let estadoCivil = prompt("Ingresa el estado civil del asegurado (casado o soltero):");
+let edadConyuge = 0;
+if (estadoCivil === "casado") {
+    edadConyuge = prompt("Ingresa la edad del cónyuge:");
+}
+let cantidadHijos = prompt("Ingresa la cantidad de hijos:");
+let precioBase = 2000;  // El precio base es Q. 2,000
+
+// Paso 2: Verificar si el asegurado es mayor de edad
+if (edadAsegurado < 18) {
+    alert("No se puede realizar la cotización, asegurado menor de edad.");
+} else {
+    // Paso 3: Calcular el recargo por la edad del asegurado
+    let recargoAsegurado = 0;
+    if (edadAsegurado >= 18 && edadAsegurado <= 24) {
+        recargoAsegurado = precioBase * 0.10;  // Recargo del 10%
+    } else if (edadAsegurado >= 25 && edadAsegurado <= 49) {
+        recargoAsegurado = precioBase * 0.20;  // Recargo del 20%
+    } else if (edadAsegurado >= 50) {
+        recargoAsegurado = precioBase * 0.30;  // Recargo del 30%
+    }
+
+    // Paso 4: Verificar si está casado y calcular recargo por cónyuge
+    let recargoConyuge = 0;
+    if (estadoCivil === "casado") {
+        if (edadConyuge >= 18 && edadConyuge <= 24) {
+            recargoConyuge = precioBase * 0.10;  // Recargo del 10%
+        } else if (edadConyuge >= 25 && edadConyuge <= 49) {
+            recargoConyuge = precioBase * 0.20;  // Recargo del 20%
+        } else if (edadConyuge >= 50) {
+            recargoConyuge = precioBase * 0.30;  // Recargo del 30%
+        }
+    }
+
+    // Paso 5: Calcular recargo por cantidad de hijos
+    let recargoHijos = 0;
+    if (cantidadHijos > 0) {
+        recargoHijos = cantidadHijos * (precioBase * 0.20);  // Recargo del 20% por cada hijo
+    }
+
+    // Paso 6: Calcular precio total
+    let precioTotal = precioBase + recargoAsegurado + recargoConyuge + recargoHijos;
+
+    // Paso 7: Mostrar resultados
+    alert("Precio base: Q." + precioBase);
+    alert("Recargo por asegurado: Q." + recargoAsegurado);
+    alert("Recargo por cónyuge: Q." + recargoConyuge);
+    alert("Recargo por hijos: Q." + recargoHijos);
+    alert("Precio total: Q." + precioTotal);
+}
